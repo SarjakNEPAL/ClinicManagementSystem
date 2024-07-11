@@ -9,7 +9,7 @@ public class MySqlConnection implements Database {
             String username = "Clinic";
             String password = "Clinic";
             String database = "ClinicManagementSystem";
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection;
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/" + database, username, password
