@@ -1,10 +1,10 @@
 create database ClinicManagementSystem;
 USE ClinicManagementSystem;
 CREATE TABLE Staff (
-    ID INT(10),
-    Name VARCHAR(255),
-    Type VARCHAR(10),
-    Password VARCHAR(16)
+                       ID INT(10) primary key auto_increment,
+                       Name VARCHAR(255),
+                       Type VARCHAR(10),
+                       Password VARCHAR(200)
 );
 
 CREATE TABLE Patient (

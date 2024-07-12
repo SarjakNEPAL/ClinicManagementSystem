@@ -29,10 +29,7 @@ public class Staff {
     public String getType(){
         return this.Type;
     }
-    public String getPassword(){
-        return this.password;
-    }   
-    
+    public String getPassword(){return this.password;}
 }
 
 
