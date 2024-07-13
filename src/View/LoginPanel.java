@@ -6,6 +6,8 @@ package View;
 import dao.UserDao;
 import Model.Staff;
 import javax.swing.*;
+import java.awt.Toolkit;
+
 
 /**
  *
@@ -175,10 +177,15 @@ public class LoginPanel extends javax.swing.JFrame {
         UserDao a=new UserDao();
         Staff kk = a.login(user);
         if (kk == null) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this,"Username or Password error");
+            
         } else {
             if (kk.getType().equals("owner")) {
                 JOptionPane.showMessageDialog(this,"Logged In as admin");
+                this.dispose();
+                OwnerPanel pk=new OwnerPanel();
+                pk.setVisible(true);
                 
             } else {
                 JOptionPane.showMessageDialog(this,"Logged In as Staff");

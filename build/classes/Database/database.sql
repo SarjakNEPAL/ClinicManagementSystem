@@ -37,6 +37,8 @@ CREATE TABLE Appointment (
     FOREIGN KEY (StaffID) REFERENCES Staff(ID)
 );
 
+
 -- Insert a sample staff record (remember to hash the password securely)
 INSERT INTO Staff (ID, Name, Type, Password)
 VALUES (1234, 'admin', 'owner', 'hZp9RUu4ckO5337OrZEyPg==');
+
