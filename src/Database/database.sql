@@ -21,3 +21,4 @@ CREATE TABLE Appointment (
     Doctor VARCHAR(255),
     StaffID INT REFERENCES Staff(ID)
 );
+insert into Staff VALUES(1234,"admin","owner","hZp9RUu4ckO5337OrZEyPg==");
