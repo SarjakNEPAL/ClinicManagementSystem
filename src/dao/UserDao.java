@@ -50,58 +50,7 @@ public class UserDao {
         }
         return null;
     }
-    public boolean register(Staff reg) {
-
-        if (doesE(reg.getName())) {
-            System.out.println("Exists");
-            return false;
-        } else {
-            System.out.println("Doesnt Exist");
-            Connection conn= mysql.openConnection();
-            String sql = "INSERT INTO Staff(Name,Type,Password) Values(?,'Staff',?);";
-            try (PreparedStatement p = conn.prepareStatement(sql)) {
-                p.setString(1,reg.getName());
-                p.setString(2,(reg.getPassword()));
-                secure kk = new secure();
-                kk.plainText= reg.getPassword();
-                    kk.encrypt();
-                p.setString(2, kk.cipherText);
-                p.executeUpdate();
-                }catch ( Exception f){
-                    System.out.println(f);
-                    return false;
-                }
-finally {
-                mysql.closeConnection(conn);
-            }
-            return true;
-        }
-    }
-
-    public boolean doesE(String Name) {
-        boolean eee=false;
-        ResultSet re;
-        Connection conn = mysql.openConnection();
-        String query = "SELECT Name FROM STAFF WHERE Name=?";
-        try (PreparedStatement stt = conn.prepareStatement(query)) {
-            stt.setString(1, (Name));
-            re = stt.executeQuery();
-            if(re.next()){
-                if(re.getString("Name").equals(Name)){
-                    eee= true;
-                }
-                else {
-                eee=  false;
-                }
-            }
-        } catch (SQLException ex) {
-            System.err.println("SQL error: " + ex.getMessage());
-        } finally {
-
-            mysql.closeConnection(conn);
-        }
-        return eee;
-    }
 }
+
 
 

@@ -1,10 +1,10 @@
 package demo;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLOutput;
-
-import Controller.secure;
-import Database.MySqlConnection;
+//import java.sql.Connection;
+//import java.sql.ResultSet;
+//import java.sql.SQLOutput;
+//
+//import Controller.secure;
+//import Database.MySqlConnection;
 import Model.Staff;
 import dao.UserDao;
 
@@ -23,15 +23,15 @@ public class demo {
             } else {
                 System.out.println("Staff Logged in");
             }
-//    }
-            user.setName("Okla");
-            user.setPassword("Okla");
-            user.setType("Staff");
-            if (a.register(user)) {
-                System.out.println("Okay");
-            } else {
-                System.out.println("No");
-            }
+////    }
+//            user.setName("Okla");
+//            user.setPassword("Okla");
+//            user.setType("Staff");
+//            if (a.register(user)) {
+//                System.out.println("Okay");
+//            } else {
+//                System.out.println("No");
+//            }
         }
     }
 }
