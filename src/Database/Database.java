@@ -1,4 +1,4 @@
-package ClinicManagementSystem.Database;
+package Database;
 import java.sql.*;
 
 public interface Database{
