@@ -1,12 +1,12 @@
-package demo;
+package ClinicManagementSystem.demo;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLOutput;
 
-import Controller.secure;
-import Database.MySqlConnection;
-import Model.Staff;
-import dao.UserDao;
+import ClinicManagementSystem.Controller.secure;
+import ClinicManagementSystem.Database.MySqlConnection;
+import ClinicManagementSystem.Model.Staff;
+import ClinicManagementSystem.dao.UserDao;
 
 public class demo {
     public static void main(String[] args) {

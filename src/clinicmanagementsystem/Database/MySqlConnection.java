@@ -1,4 +1,4 @@
-package Database;
+package ClinicManagementSystem.Database;
 import java.sql.*;
 
 public class MySqlConnection implements Database {
