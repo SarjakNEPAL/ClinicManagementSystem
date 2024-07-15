@@ -1,4 +1,4 @@
-package clinicmanagementsystem;
+ package clinicmanagementsystem;
 
 
 
