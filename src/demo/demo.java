@@ -6,33 +6,18 @@ package demo;
 //import Controller.secure;
 //import Database.MySqlConnection;
 import Model.Staff;
+import dao.OwnerDao;
 import dao.UserDao;
 
 public class demo {
     public static void main(String[] args) {
-        UserDao a = new UserDao();
-        Staff user = new Staff();
-        user.setName("admin");
-        user.setPassword("admin");
-        Staff kk = a.login(user);
-        if (kk == null) {
-            System.out.println("Login failed");
-        } else {
-            if (kk.getType().equals("owner")) {
-                System.out.println("Admin Logged in");
-            } else {
-                System.out.println("Staff Logged in");
-            }
-////    }
-//            user.setName("Okla");
-//            user.setPassword("Okla");
-//            user.setType("Staff");
-//            if (a.register(user)) {
-//                System.out.println("Okay");
-//            } else {
-//                System.out.println("No");
+        OwnerDao a = new OwnerDao();
+        for (Object element : a.fetchStaffRecords()) {
+            System.out.println();
+        }
+
 //            }
         }
     }
-}
+
 
