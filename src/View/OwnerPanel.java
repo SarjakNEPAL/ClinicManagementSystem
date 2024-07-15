@@ -52,6 +52,9 @@ public class OwnerPanel extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 StaffMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                StaffMousePressed(evt);
+            }
         });
         Staff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +162,12 @@ public class OwnerPanel extends javax.swing.JFrame {
         Adminpassword kkg= new Adminpassword();
         kkg.setVisible(true);        
     }//GEN-LAST:event_ChgPssMouseClicked
+
+    private void StaffMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StaffMousePressed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Staffinnformationpanel.setVisible(true);
+    }//GEN-LAST:event_StaffMousePressed
 
     /**
      * @param args the command line arguments

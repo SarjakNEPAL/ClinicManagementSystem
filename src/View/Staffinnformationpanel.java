@@ -1,13 +1,19 @@
+package View;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
 import java.awt.*;
 import java.sql.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
+import Model.Staff;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import dao.OwnerDao;
 /**
  *
  * @author Aayush
@@ -19,10 +25,36 @@ public class Staffinnformationpanel extends javax.swing.JFrame {
      */
     
     public Staffinnformationpanel() {
-        initComponents();
-        
+            initComponents();
+            generateTanble();
+    }
+
         
     }
+    private void generateTable(){
+        
+        OwnerDao dao=new OwnerDao();
+                List<Staff> staffList = dao.fetchStaffRecords();
+
+        // Column names
+        String[] columnNames = {"ID", "Name", "Password"};
+
+        // Table model
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+
+        // Populate table model
+        for (Staff staff : staffList) {
+            Object[] rowData = {staff.getId(), staff.getName(), staff.getPassword()};
+            tableModel.addRow(rowData);
+        }
+
+        // Table
+        JTable table = new JTable(tableModel);
+
+        // Scroll pane
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane, BorderLayout.CENTER); 
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
