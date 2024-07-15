@@ -253,7 +253,8 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
                 case "OK":
                     JOptionPane.showMessageDialog(this,"Registered Staff successfully");
                     this.dispose();
-                    //OPENS STAFF INFORMATION PANEL
+                    Staffinnformationpanel kkg=new Staffinnformationpanel();
+                    kkg.setVisible(true);
             }}
             else{
                 JOptionPane.showMessageDialog(this,"Password must be more than 8 characters long");
