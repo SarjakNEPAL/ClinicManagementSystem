@@ -2,10 +2,10 @@ package Model;
 
 
 public class Staff {
-    private int id;
-    private String Name;
-    private String Type;
-    private String password; 
+    protected int id;
+    protected String Name;
+    protected String Type;
+    protected String password;
 
     public void setId(int id){
         this.id=id;
@@ -31,5 +31,4 @@ public class Staff {
     }
     public String getPassword(){return this.password;}
 }
-
 

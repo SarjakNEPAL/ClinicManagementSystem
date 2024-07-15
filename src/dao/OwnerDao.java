@@ -11,12 +11,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import Model.Staff;
 /**
  *
  * @author sarjak
  */
 public class OwnerDao{
+
     MySqlConnection mysql = new MySqlConnection();
     secure cc = new secure();
     public String getOwnerPass(){
@@ -62,33 +63,32 @@ public boolean chgPasAdmn(String Npass){
        return isOK;
    }
 }
-public boolean register(Staff reg) {
-
-        if (doesE(reg.getName())) {
-            System.out.println("Exists");
-            return false;
-        } else {
-            System.out.println("Doesnt Exist");
-            Connection conn= mysql.openConnection();
-            String sql = "INSERT INTO Staff(Name,Type,Password) Values(?,'Staff',?);";
-            try (PreparedStatement p = conn.prepareStatement(sql)) {
-                p.setString(1,reg.getName());
-                p.setString(2,(reg.getPassword()));
-                secure kk = new secure();
-                kk.plainText= reg.getPassword();
+public String createStaff(Staff reg) {
+            if (doesE(reg.getName())) {
+                System.out.println("Exists");
+                return "EXT";
+            } else {
+                System.out.println("Doesnt Exist");
+                Connection conn = mysql.openConnection();
+                String sql = "INSERT INTO Staff(Name,Type,Password) Values(?,'Staff',?);";
+                try (PreparedStatement p = conn.prepareStatement(sql)) {
+                    p.setString(1, reg.getName());
+                    p.setString(2, (reg.getPassword()));
+                    secure kk = new secure();
+                    kk.plainText = reg.getPassword();
                     kk.encrypt();
-                p.setString(2, kk.cipherText);
-                p.executeUpdate();
-                }catch ( Exception f){
+                    p.setString(2, kk.cipherText);
+                    p.executeUpdate();
+                } catch (Exception f) {
                     System.out.println(f);
-                    return false;
+                    return "SQL";
+                } finally {
+                    mysql.closeConnection(conn);
                 }
-finally {
-                mysql.closeConnection(conn);
             }
-            return true;
-        }
+    return "OK";
     }
+
 
     public boolean doesE(String Name) {
         boolean eee=false;
@@ -104,6 +104,27 @@ finally {
                 }
                 else {
                 eee=  false;
+                }
+            }
+        } catch (SQLException ex) {
+            System.err.println("SQL error: " + ex.getMessage());
+        } finally {
+
+            mysql.closeConnection(conn);
+        }
+        return eee;
+    }
+    public boolean doesExceed(int maxStaff){
+        boolean eee=true;
+        ResultSet re;
+        Connection conn = mysql.openConnection();
+        String query = "SELECT COUNT(*) AS result FROM STAFF WHERE Type=?";
+        try (PreparedStatement stt = conn.prepareStatement(query)) {
+            stt.setString(1, ("Staff"));
+            re = stt.executeQuery();
+            if(re.next()){
+                if(re.getInt("result")<= maxStaff){
+                    eee= false;
                 }
             }
         } catch (SQLException ex) {
