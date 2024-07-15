@@ -166,8 +166,8 @@ public class OwnerPanel extends javax.swing.JFrame {
     private void StaffMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StaffMousePressed
         // TODO add your handling code here:
         this.setVisible(false);
-        StaffInformationPanel a= new StaffInformationPanel();
-        a.setVisible(true);
+//        StaffInformationPanel a= new StaffInformationPanel();
+//        a.setVisible(true);
     }//GEN-LAST:event_StaffMousePressed
 
     /**
