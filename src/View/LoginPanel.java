@@ -182,13 +182,18 @@ public class LoginPanel extends javax.swing.JFrame {
             
         } else {
             if (kk.getType().equals("owner")) {
-                JOptionPane.showMessageDialog(this,"Logged In as admin");
                 this.dispose();
+                JOptionPane.showMessageDialog(this,"Logged In as admin");
+                
                 OwnerPanel pk=new OwnerPanel();
                 pk.setVisible(true);
                 
             } else {
+                this.dispose();
                 JOptionPane.showMessageDialog(this,"Logged In as Staff");
+                staffHomePage omg;
+                omg = new staffHomePage();
+                omg.setVisible(true);
             }
         }
     

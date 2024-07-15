@@ -6,8 +6,10 @@ package View;
 import Model.Staff;
 import dao.OwnerDao;
 import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.util.List;
 import java.lang.Object;
+import javax.swing.table.DefaultTableModel;
 //import java.swing.table.DefaultTableModel;
 /**
  *
@@ -20,6 +22,7 @@ public class Staffinnformationpanel extends javax.swing.JFrame {
      */
     public Staffinnformationpanel() {
         initComponents();
+        fillTable();
     }
 
     /**
@@ -64,6 +67,11 @@ public class Staffinnformationpanel extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Delete");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(102, 0, 102));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -77,8 +85,7 @@ public class Staffinnformationpanel extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Password"
@@ -160,6 +167,29 @@ public class Staffinnformationpanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    DefaultTableModel tblModel=(DefaultTableModel) jTable1.getModel();
+        int row = jTable1.getSelectedRow();
+    if(jTable1.getSelectedRowCount()==1){
+        int column = 0; // First column index
+        int value = (int)jTable1.getModel().getValueAt(row, column);
+        OwnerDao owner=new OwnerDao();
+        owner.deleteStaff(value);
+        this.dispose();
+        JOptionPane.showMessageDialog(this,"Staff deleted successfully");
+        Staffinnformationpanel ok = new Staffinnformationpanel();
+        ok.setVisible(true);
+    }
+    else{
+        if(jTable1.getSelectedRowCount()==1){JOptionPane.showMessageDialog(this,"Please register a user first");}
+        else{JOptionPane.showMessageDialog(this,"Single row must be selected");}
+    }
+    
+    
+    
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,6 +223,24 @@ public class Staffinnformationpanel extends javax.swing.JFrame {
                 new Staffinnformationpanel().setVisible(true);
             }
         });
+    }
+    private void fillTable(){
+    // Assuming you have a List<Staff> called staffList
+        OwnerDao init=new OwnerDao();
+        List<Staff> staffList = init.fetchStaffRecords(); // Initialize this with your actual data
+            
+        // Create a DefaultTableModel with column names
+        String[] columnNames = {"ID", "Name", "Password"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        // Populate the table with data from the staffList
+        for (Staff staff : staffList) {
+            Object[] rowData = {staff.getId(), staff.getName(), staff.getPassword()};
+            model.addRow(rowData);
+        }
+
+        // Set the model for your jTable1
+        jTable1.setModel(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

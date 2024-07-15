@@ -221,13 +221,13 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new OwnerPanel().setVisible(true);
+        new Staffinnformationpanel().setVisible(true);
     }//GEN-LAST:event_CancelActionPerformed
 
     private void CancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new OwnerPanel().setVisible(true);
+        new Staffinnformationpanel().setVisible(true);
     }//GEN-LAST:event_CancelMouseClicked
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
