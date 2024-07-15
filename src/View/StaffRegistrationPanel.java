@@ -244,6 +244,7 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
         String ConfirmPassword=CPass.getText();
         if(!(newStaff.getName().isEmpty())&& !(newStaff.getPassword().isEmpty())&&!(ConfirmPassword.isEmpty())){
             String execute=a.createStaff(newStaff);
+            if(newStaff.getPassword().length()>8){
             switch (execute){
                 case "EXT":
                     JOptionPane.showMessageDialog(this,"Staff with following name already exist");
@@ -253,9 +254,11 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this,"Registered Staff successfully");
                     this.dispose();
                     //OPENS STAFF INFORMATION PANEL
-                default:
-                    JOptionPane.showMessageDialog(this,"Failed");
+            }}
+            else{
+                JOptionPane.showMessageDialog(this,"Password must be more than 8 characters long");
             }
+            
         }
         else{
             JOptionPane.showMessageDialog(this,"Fill all the fields");

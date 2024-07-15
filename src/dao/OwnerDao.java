@@ -11,7 +11,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import Model.Staff;
+
 /**
  *
  * @author sarjak
@@ -114,17 +120,17 @@ public String createStaff(Staff reg) {
         }
         return eee;
     }
-    public boolean doesExceed(int maxStaff){
-        boolean eee=true;
+    public boolean doesExceed(int maxStaff) {
+        boolean eee = true;
         ResultSet re;
         Connection conn = mysql.openConnection();
         String query = "SELECT COUNT(*) AS result FROM STAFF WHERE Type=?";
         try (PreparedStatement stt = conn.prepareStatement(query)) {
             stt.setString(1, ("Staff"));
             re = stt.executeQuery();
-            if(re.next()){
-                if(re.getInt("result")<= maxStaff){
-                    eee= false;
+            if (re.next()) {
+                if (re.getInt("result") <= maxStaff) {
+                    eee = false;
                 }
             }
         } catch (SQLException ex) {
@@ -135,4 +141,41 @@ public String createStaff(Staff reg) {
         }
         return eee;
     }
-}
+    public List<Staff> fetchStaffRecords() {
+        List<Staff> staffList = new ArrayList<>();
+        Connection conn = mysql.openConnection();
+        try {
+
+            String sqlQuery = "SELECT ID, Name, Password FROM Staff where Type='Staff'";
+            PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("ID");
+                String name = resultSet.getString("Name");
+                cc.cipherText = resultSet.getString("Password");
+                cc.decrypt();
+                String password = cc.plainText;
+                Staff staff = new Staff();
+                staff.setId(id);
+                staff.setName(name);
+                staff.setPassword(password);
+                staffList.add(staff);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            mysql.closeConnection(conn);
+        }
+        for (Object element : staffList) {
+            System.out.println(element);
+        }
+        return staffList;
+    }
+    }
+
+

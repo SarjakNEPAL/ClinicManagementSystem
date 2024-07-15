@@ -30,5 +30,13 @@ public class Staff {
         return this.Type;
     }
     public String getPassword(){return this.password;}
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "id=" + id +
+                ", name='" + Name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
 
