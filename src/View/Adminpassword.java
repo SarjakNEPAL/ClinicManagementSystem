@@ -55,6 +55,11 @@ public class Adminpassword extends javax.swing.JFrame {
                 OPassActionPerformed(evt);
             }
         });
+        OPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                OPassKeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Old password");
@@ -64,9 +69,20 @@ public class Adminpassword extends javax.swing.JFrame {
                 NpassActionPerformed(evt);
             }
         });
+        Npass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NpassKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("New password");
+
+        Cpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CpassKeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Confirm password");
@@ -186,10 +202,14 @@ public class Adminpassword extends javax.swing.JFrame {
         chgp.CPass=Cpass.getText();
         String Output=chgp.chgPass();
         if(Output.equals("EMPTY")){JOptionPane.showMessageDialog(this,"Fill all the fields");}
-        if(Output.equals("OPNP")){JOptionPane.showMessageDialog(this,"Old Password and New Password cannot be same");}
-        if(Output.equals("NPCP")){JOptionPane.showMessageDialog(this,"New Password and Confirm Password must be same");}
-        if(Output.equals("PSMC")){JOptionPane.showMessageDialog(this,"Old Password is incorrect");}
-        if(Output.equals("NTLG")){JOptionPane.showMessageDialog(this,"New Password must be more than 7 character long");}
+        if(Output.equals("OPNP")){JOptionPane.showMessageDialog(this,"Old Password and New Password cannot be same");
+                Npass.requestFocus();}
+        if(Output.equals("NPCP")){JOptionPane.showMessageDialog(this,"New Password and Confirm Password must be same");
+        Cpass.requestFocus();}
+        if(Output.equals("PSMC")){JOptionPane.showMessageDialog(this,"Old Password is incorrect");
+        OPass.requestFocus();}
+        if(Output.equals("NTLG")){JOptionPane.showMessageDialog(this,"New Password must be more than 7 character long");
+        Npass.requestFocus();}
         if(Output.equals("Failed")){JOptionPane.showMessageDialog(this,"Failed Changing Password");}
         if(Output.equals("Success")){JOptionPane.showMessageDialog(this,"Password Changed Successfully!! Logging Out! Please Relogin!");
             this.dispose();
@@ -206,6 +226,30 @@ public class Adminpassword extends javax.swing.JFrame {
         OwnerPanel a=new OwnerPanel();
         a.setVisible(true);
     }//GEN-LAST:event_CancelMouseClicked
+
+    private void OPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OPassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+        Npass.requestFocus();
+        evt.consume();
+    }
+    }//GEN-LAST:event_OPassKeyPressed
+
+    private void NpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NpassKeyPressed
+        // TODO add your handling code here:
+      if (evt.getKeyCode() == evt.VK_ENTER) {
+        Cpass.requestFocus();
+        evt.consume();
+      }
+    }//GEN-LAST:event_NpassKeyPressed
+
+    private void CpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CpassKeyPressed
+        // TODO add your handling code here:
+              if (evt.getKeyCode() == evt.VK_ENTER) {
+        Submit.requestFocus();
+        evt.consume();
+      }
+    }//GEN-LAST:event_CpassKeyPressed
 
     /**
      * @param args the command line arguments

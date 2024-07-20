@@ -15,6 +15,7 @@ import java.awt.Toolkit;
  */
 public class LoginPanel extends javax.swing.JFrame {
     Staff user = new Staff();
+    
     /**
      * Creates new form LoginPanel
      */
@@ -56,11 +57,26 @@ public class LoginPanel extends javax.swing.JFrame {
 
         username.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
+        username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameKeyPressed(evt);
+            }
+        });
 
         password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
+            }
+        });
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordKeyPressed(evt);
             }
         });
 
@@ -79,6 +95,11 @@ public class LoginPanel extends javax.swing.JFrame {
         login.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 loginMousePressed(evt);
+            }
+        });
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginActionPerformed(evt);
             }
         });
 
@@ -197,6 +218,32 @@ public class LoginPanel extends javax.swing.JFrame {
         }
     
     }//GEN-LAST:event_loginMousePressed
+
+    private void usernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyPressed
+        // TODO add your handling code here:
+     if (evt.getKeyCode() == evt.VK_ENTER) {
+        password.requestFocus();
+        evt.consume();
+    }
+    }//GEN-LAST:event_usernameKeyPressed
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
+
+    private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
+        // TODO add your handling code here:
+     if (evt.getKeyCode() == evt.VK_ENTER) {
+        login.requestFocus();
+        evt.consume();
+     }
+    
+    }//GEN-LAST:event_passwordKeyPressed
+
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_loginActionPerformed
 
     /**
      * @param args the command line arguments
