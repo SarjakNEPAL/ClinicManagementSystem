@@ -46,8 +46,7 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setResizable(false);
-        setType(null);
+        setPreferredSize(new java.awt.Dimension(800, 548));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -196,16 +195,16 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(83, 83, 83))
         );
 
         pack();
@@ -222,13 +221,13 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new OwnerPanel().setVisible(true);
+        new Staffinnformationpanel().setVisible(true);
     }//GEN-LAST:event_CancelActionPerformed
 
     private void CancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new OwnerPanel().setVisible(true);
+        new Staffinnformationpanel().setVisible(true);
     }//GEN-LAST:event_CancelMouseClicked
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
@@ -254,7 +253,8 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
                 case "OK":
                     JOptionPane.showMessageDialog(this,"Registered Staff successfully");
                     this.dispose();
-                    //OPENS STAFF INFORMATION PANEL
+                    Staffinnformationpanel kkg=new Staffinnformationpanel();
+                    kkg.setVisible(true);
             }}
             else{
                 JOptionPane.showMessageDialog(this,"Password must be more than 8 characters long");
