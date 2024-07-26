@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/manis/OneDrive/Documents/A_CLINIC_MANAGEMENT_SYSTEM/src/View/Staffinformationpanel.java</file>
+            <file>file:/G:/SEM%202/src/dao/StaffDAO.java</file>
+            <file>file:/G:/SEM%202/src/View/StaffRegistrationPanel.java</file>
+            <file>file:/G:/SEM%202/src/View/PatientRegistrationPanel.java</file>
+            <file>file:/G:/SEM%202/src/View/staffHomePage.java</file>
+            <file>file:/G:/SEM%202/src/View/AppointmentInformationPanel.java</file>
+            <file>file:/G:/SEM%202/src/Controller/patientTasks.java</file>
         </group>
     </open-files>
 </project-private>
