@@ -8,12 +8,13 @@ package clinicmanagementsystem.view;
  *
  * @author Aayush
  */
-public class Staffinnformationpanel extends javax.swing.JFrame {
+public class Staffinformationpanel extends javax.swing.JFrame {
 
     /**
-     * Creates new form Staffinnformationpanel
+     * Creates new form Staffinformationpanel
      */
-    public Staffinnformationpanel() {
+    
+    public Staffinformationpanel() {
         initComponents();
     }
 
@@ -150,20 +151,21 @@ public class Staffinnformationpanel extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Staffinnformationpanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staffinformationpanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Staffinnformationpanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staffinformationpanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Staffinnformationpanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staffinformationpanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Staffinnformationpanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Staffinformationpanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Staffinnformationpanel().setVisible(true);
+                new Staffinformationpanel().setVisible(true);
             }
         });
     }
