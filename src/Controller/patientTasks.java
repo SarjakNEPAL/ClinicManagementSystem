@@ -12,11 +12,21 @@ import dao.StaffDAO;
  * @author bhand
  */
 public class patientTasks {
-    StaffDAO k=new StaffDAO();
-    public boolean Clicked(int Number){
-        Patient pp=k.seekPatient(Number);
+    private StaffDAO k=new StaffDAO();
+    private Patient pp;
+    public boolean isPatientExist(int Number){
+        this.pp=k.seekPatient(Number);
         if(pp!=null){return true;}
         return false;
     }
-
+    
+    public boolean commitPatient(Patient p){
+        if(k.register(p)){return true;}
+        else{return false;}
+    }
+    
+    public Patient getPatient(){
+        return this.pp;
+    }
+   
 }
