@@ -176,6 +176,24 @@ public String createStaff(Staff reg) {
         }
         return staffList;
     }
+   
+   public boolean deleteStaff(int id){
+       Connection conn=mysql.openConnection();
+       try{
+           
+           String sql="DELETE FROM Staff WHERE ID="+id;
+           PreparedStatement pst=conn.prepareStatement(sql);
+           pst.execute();
+           return true;
+           
+        }catch(Exception e){
+            System.out.println(e);
+        }
+       finally{
+           mysql.closeConnection(conn);
+       }
+       return false;
+   }
     }
 
 
