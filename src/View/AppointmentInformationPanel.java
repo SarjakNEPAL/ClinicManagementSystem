@@ -136,7 +136,7 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
                             .addComponent(jButton3)
                             .addComponent(jButton1)))
                     .addComponent(jLabel4))
-                .addGap(15, 15, 15))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

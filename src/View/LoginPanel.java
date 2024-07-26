@@ -57,7 +57,6 @@ public class LoginPanel extends javax.swing.JFrame {
         username.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        password.setText("jPasswordField1");
         password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,9 +188,11 @@ public class LoginPanel extends javax.swing.JFrame {
                 pk.setVisible(true);
                 
             } else {
+                staffHomePage.StaffName=kk.getName();
                 this.dispose();
-                JOptionPane.showMessageDialog(this,"Logged In as Staff");
-                staffHomePage omg;
+                staffHomePage omg;        
+                String messege="Logged In as "+staffHomePage.StaffName;
+                JOptionPane.showMessageDialog(this,messege);
                 omg = new staffHomePage();
                 omg.setVisible(true);
             }
