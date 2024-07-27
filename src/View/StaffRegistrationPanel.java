@@ -76,11 +76,6 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
 
         Staff_Name.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         Staff_Name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Staff_Name.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Staff_NameKeyPressed(evt);
-            }
-        });
 
         NPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         NPass.addActionListener(new java.awt.event.ActionListener() {
@@ -88,21 +83,11 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
                 NPassActionPerformed(evt);
             }
         });
-        NPass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                NPassKeyPressed(evt);
-            }
-        });
 
         CPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CPassActionPerformed(evt);
-            }
-        });
-        CPass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                CPassKeyPressed(evt);
             }
         });
 
@@ -263,7 +248,6 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
             switch (execute){
                 case "EXT":
                     JOptionPane.showMessageDialog(this,"Staff with following name already exist");
-                    Staff_Name.requestFocus();
                 case "SQL":
                     JOptionPane.showMessageDialog(this,"Failed Creating New staff");
                 case "OK":
@@ -274,7 +258,6 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
             }}
             else{
                 JOptionPane.showMessageDialog(this,"Password must be more than 8 characters long");
-                NPass.requestFocus();
             }
             
         }
@@ -290,30 +273,6 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
     private void SubmitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SubmitKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_SubmitKeyPressed
-
-    private void Staff_NameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Staff_NameKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER) {
-        NPass.requestFocus();
-        evt.consume();
-    }
-    }//GEN-LAST:event_Staff_NameKeyPressed
-
-    private void CPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CPassKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER) {
-        Submit.requestFocus();
-        evt.consume();
-    }
-    }//GEN-LAST:event_CPassKeyPressed
-
-    private void NPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NPassKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER) {
-        NPass.requestFocus();
-        evt.consume();
-    }
-    }//GEN-LAST:event_NPassKeyPressed
     
     /**
      * @param args the command line arguments
