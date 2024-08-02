@@ -4,11 +4,13 @@
  */
 package dao;
 import Model.Patient;
+import Model.Appointment;
 import Database.MySqlConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 /**
  *
  * @author bhand
@@ -58,7 +60,54 @@ public class StaffDAO {
                     
         return false;
         }
+    public boolean isAppointmentFree(Appointment a){
+        boolean eee=false;
+        ResultSet re;
+        Connection conn = mysql.openConnection();
+        String query = "SELECT Date FROM appointment WHERE time=? and date=? and Doctor=?";
+        try (PreparedStatement stt = conn.prepareStatement(query)) {
+            stt.setString(2, (a.getDate()));
+            stt.setString(1, (a.getTime()));
+            stt.setString(1, (a.getDoctor()));
+            re = stt.executeQuery();
+            if(re.next()){
+                if(re.getString("Date").equals(a.getDate())){
+                    eee= !true;
+                }
+                else {
+                eee=  !false;
+                }
+            }
+        } catch (SQLException ex) {
+            System.err.println("SQL error: " + ex.getMessage());
+        } finally {
+
+            mysql.closeConnection(conn);
+        }
+        return eee;
+    }
+    public boolean registerAppointment(Appointment a){
+                Connection conn = mysql.openConnection();
+                String sql = "INSERT INTO appointment(PatientPhone,Date,Time,Doctor,StaffID) Values(?,?,?,?);";
+                try (PreparedStatement p = conn.prepareStatement(sql)) {
+                    p.setInt(1, Appointment.PatientPhone);
+                    p.setString(2, a.getDate());
+                    p.setString(3,a.getTime());
+                    p.setString(4,a.getDoctor());
+                    p.setInt(5, Appointment.StaffId);
+                    p.executeUpdate();
+                    return true;
+                } catch (Exception f) {
+                    System.out.println(f);
+  
+                } finally {
+                    mysql.closeConnection(conn);
+                }
+                    
+        return false;
+    }
 }
+
 
 
 
