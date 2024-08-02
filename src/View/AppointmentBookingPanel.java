@@ -40,7 +40,7 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        date = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -57,17 +57,14 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
 
         jLabel1.setBackground(java.awt.Color.white);
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setForeground(java.awt.Color.black);
         jLabel1.setText("Date :");
 
         jLabel3.setBackground(java.awt.Color.white);
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel3.setForeground(java.awt.Color.black);
         jLabel3.setText("Time :");
 
         jLabel5.setBackground(java.awt.Color.white);
         jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel5.setForeground(java.awt.Color.black);
         jLabel5.setText("Doctor :");
 
         bookButton.setBackground(new java.awt.Color(50, 0, 50));
@@ -98,7 +95,7 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
         jComboBox2.setForeground(java.awt.Color.white);
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10 AM", "1 PM", "3 PM" }));
 
-        jDateChooser1.setBackground(new java.awt.Color(50, 0, 50));
+        date.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,20 +113,24 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel1)
                     .addComponent(jLabel5))
-                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, 99, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(98, 98, 98)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -289,9 +290,9 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookButton;
     private javax.swing.JButton cancelButton;
+    private com.toedter.calendar.JDateChooser date;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

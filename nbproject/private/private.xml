@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/manis/OneDrive/Documents/A_CLINIC_MANAGEMENT_SYSTEM/src/View/AppointmentInformationPanel.java</file>
-            <file>file:/C:/Users/manis/OneDrive/Documents/A_CLINIC_MANAGEMENT_SYSTEM/src/View/AppointmentBookingPanel.java</file>
+            <file>file:/G:/SEM%202/src/Model/Appointment.java</file>
+            <file>file:/G:/SEM%202/src/dao/StaffDAO.java</file>
+            <file>file:/G:/SEM%202/src/dao/OwnerDao.java</file>
+            <file>file:/G:/SEM%202/src/View/OwnerPanel.java</file>
+            <file>file:/G:/SEM%202/src/View/AppointmentBookingPanel.java</file>
         </group>
     </open-files>
 </project-private>
