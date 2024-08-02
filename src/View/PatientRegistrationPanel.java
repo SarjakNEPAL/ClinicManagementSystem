@@ -291,7 +291,7 @@ public class PatientRegistrationPanel extends javax.swing.JFrame {
             if (num.matches("\\d+")) {
                 if (num.length() == 10) {
                     try {
-                        int phoneNumber = Integer.parseInt(num); // Convert string to integer
+                        long phoneNumber = Long.parseLong(num); // Convert string to integer
                         pp.setPhoneNumber(phoneNumber);
                         patientTasks ptsk = new patientTasks();
                         if(ptsk.commitPatient(pp)){

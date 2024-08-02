@@ -14,7 +14,7 @@ import dao.StaffDAO;
 public class patientTasks {
     private StaffDAO k=new StaffDAO();
     private Patient pp;
-    public boolean isPatientExist(int Number){
+    public boolean isPatientExist(long Number){
         this.pp=k.seekPatient(Number);
         if(pp!=null){return true;}
         return false;

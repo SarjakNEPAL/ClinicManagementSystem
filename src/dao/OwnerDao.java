@@ -26,6 +26,25 @@ public class OwnerDao{
 
     MySqlConnection mysql = new MySqlConnection();
     secure cc = new secure();
+    public int getStaffId(String Name){
+    Connection conn = mysql.openConnection();
+        String sql = "SELECT ID FROM Staff where Name = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1,Name);
+            
+            ResultSet result = pstmt.executeQuery();
+            if (result.next()) {
+                 return result.getInt("ID");
+              
+                }
+        } catch (SQLException ex) {
+            System.err.println("SQL error: " + ex.getMessage());
+        } finally {
+            mysql.closeConnection(conn);
+        }
+        return -1;
+
+}
     public String getOwnerPass(){
         Connection conn = mysql.openConnection();
         String sql = "SELECT Password FROM Staff where ID = ?";
@@ -171,9 +190,9 @@ public String createStaff(Staff reg) {
         } finally {
             mysql.closeConnection(conn);
         }
-        for (Object element : staffList) {
-            System.out.println(element);
-        }
+//        for (Object element : staffList) {
+////            System.out.println(element);
+//        }
         return staffList;
     }
    

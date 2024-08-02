@@ -4,6 +4,11 @@
  */
 package View;
 
+import Model.*;
+import dao.StaffDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import View.staffHomePage;
 /**
  *
  * @author manis
@@ -18,6 +23,7 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Appointment Information Panel");
+        fillTable();
     }
 
     /**
@@ -31,8 +37,8 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Back = new javax.swing.JButton();
+        book = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -48,23 +54,28 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         jPanel4.setForeground(new java.awt.Color(102, 102, 102));
         jPanel4.setOpaque(false);
 
-        jButton1.setBackground(new java.awt.Color(64, 21, 64));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton1.setForeground(java.awt.Color.white);
-        jButton1.setText("Back");
-
-        jButton3.setBackground(new java.awt.Color(64, 21, 64));
-        jButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton3.setForeground(java.awt.Color.white);
-        jButton3.setText("Book Appointment");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        Back.setBackground(new java.awt.Color(64, 21, 64));
+        Back.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        Back.setForeground(java.awt.Color.white);
+        Back.setText("Back");
+        Back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                BackMouseClicked(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+
+        book.setBackground(new java.awt.Color(64, 21, 64));
+        book.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        book.setForeground(java.awt.Color.white);
+        book.setText("Book Appointment");
+        book.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bookMouseClicked(evt);
+            }
+        });
+        book.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bookActionPerformed(evt);
             }
         });
 
@@ -93,13 +104,10 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Number", "Date", "Time", "Doctor", "Staff ID"
+                "Date", "Time", "Doctor", "Staff ID"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -115,9 +123,9 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jButton3)
+                        .addComponent(book)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -133,8 +141,8 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton1)))
+                            .addComponent(book)
+                            .addComponent(Back)))
                     .addComponent(jLabel4))
                 .addContainerGap())
         );
@@ -170,17 +178,41 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_bookActionPerformed
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    private void bookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookMouseClicked
         // TODO add your handling code here:
         this.dispose();
-//        AppointmentBookingPanel signup = new AppointmentBookingPanel();
-//        signup.setVisible(true);
-    }//GEN-LAST:event_jButton3MouseClicked
+        AppointmentBookingPanel signup = new AppointmentBookingPanel();
+        signup.setVisible(true);
+    }//GEN-LAST:event_bookMouseClicked
 
+    private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        staffHomePage A =new staffHomePage(); 
+        A.setVisible(true);
+    }//GEN-LAST:event_BackMouseClicked
+    private void fillTable(){
+    // Assuming you have a List<Staff> called staffList
+        StaffDAO init=new StaffDAO();
+        List<Appointment> appointmentList = init.fetchAppointmentRecords(); // Initialize this with your actual data
+            
+        // Create a DefaultTableModel with column names
+        String[] columnNames = {"Date", "Time", "Doctor","StaffID"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        // Populate the table with data from the staffList
+        for (Appointment a : appointmentList) {
+            Object[] rowData = {a.getDate(), a.getTime(),a.getDoctor(),a.StaffID };
+            model.addRow(rowData);
+        }
+
+        // Set the model for your jTable1
+        jTable1.setModel(model);
+    }
     /**
      * @param args the command line arguments
      */
@@ -213,13 +245,14 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AppointmentInformationPanel().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton Back;
+    private javax.swing.JButton book;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

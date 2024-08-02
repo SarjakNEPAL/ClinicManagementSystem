@@ -9,11 +9,11 @@ package Model;
  * @author bhand
  */
 public class Appointment {
-    public static int PatientPhone;
+    public static long PatientPhone;
     private String Date;
     private String Time;
     private String Doctor;
-    public static int StaffId;
+    public int StaffID;
     
     // Getter methods
 

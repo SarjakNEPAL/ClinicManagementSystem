@@ -13,7 +13,7 @@ public class Patient {
     private String name;
     private String address;
     private String gender;
-    private int phoneNumber;
+    private long phoneNumber;
       // Getter for 'name'
     public String getName() {
         return name;
@@ -45,12 +45,12 @@ public class Patient {
     }
 
     // Getter for 'phoneNumber'
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
     // Setter for 'phoneNumber'
-    public void setPhoneNumber(int newPhoneNumber) {
+    public void setPhoneNumber(long newPhoneNumber) {
         this.phoneNumber = newPhoneNumber;
     }
     

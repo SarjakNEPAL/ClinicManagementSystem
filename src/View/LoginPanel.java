@@ -189,6 +189,7 @@ public class LoginPanel extends javax.swing.JFrame {
                 
             } else {
                 staffHomePage.StaffName=kk.getName();
+                staffHomePage.StaffID=kk.getId();
                 this.dispose();
                 staffHomePage omg;        
                 String messege="Logged In as "+staffHomePage.StaffName;

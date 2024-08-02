@@ -22,13 +22,13 @@ CREATE TABLE Staff (
 CREATE TABLE Patient (
     Name VARCHAR(255),
     Address VARCHAR(255),
-    PhoneNumber INT(10),
+    PhoneNumber bigint,
     Gender VARCHAR(10)
 );
 
 -- Create the Appointment table
 CREATE TABLE Appointment (
-    PatientPhone INT,
+    PatientPhone bigint,
     Date DATE,
     Time TIME,
     Doctor VARCHAR(255),

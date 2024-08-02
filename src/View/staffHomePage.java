@@ -5,6 +5,7 @@
 package View;
 import javax.swing.*;
 import Controller.patientTasks;
+import Model.Appointment;
 import Model.Patient;
 /**
  *
@@ -19,6 +20,7 @@ public class staffHomePage extends javax.swing.JFrame {
         initComponents();
     }
     public static String StaffName;
+    public static int StaffID;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -136,10 +138,23 @@ public class staffHomePage extends javax.swing.JFrame {
     else
     {   
         patientTasks ptsk=new patientTasks();
-        int number=Integer.parseInt(numberField.getText());
+        long number=Long.parseLong(numberField.getText());
         if(ptsk.isPatientExist(number)){
-            Patient p = ptsk.getPatient();
-            JOptionPane.showMessageDialog(this,"Patient Found");
+        Patient p = ptsk.getPatient();
+        String messege="Patient with details:\n Name: "+p.getName()+"\n Address: "+p.getAddress()+"\n Gender: "+p.getGender()+"\n with the number: "+p.getPhoneNumber()+"\n Do you want to view appointments?";
+                      
+            int r=JOptionPane.showConfirmDialog(this,messege,"PATIENT FOUND!!",JOptionPane.YES_NO_CANCEL_OPTION);
+            switch (r){
+                case (JOptionPane.YES_OPTION):
+                    this.dispose();
+                    AppointmentInformationPanel PRP=new AppointmentInformationPanel();
+                    PRP.setVisible(true);
+                    Appointment.PatientPhone=number;
+                    break;
+                default:
+                    this.setVisible(true);
+            }
+            
             }
         else{
             this.setVisible(false);

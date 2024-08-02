@@ -6,10 +6,14 @@ package dao;
 import Model.Patient;
 import Model.Appointment;
 import Database.MySqlConnection;
+import Model.Staff;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import View.staffHomePage;
 
 /**
  *
@@ -18,13 +22,31 @@ import java.sql.SQLException;
 public class StaffDAO {
     
     MySqlConnection mysql = new MySqlConnection();
+    public int getStaffId(String Name){
+    Connection conn = mysql.openConnection();
+        String sql = "SELECT ID FROM Staff where Name = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1,Name);
+            
+            ResultSet result = pstmt.executeQuery();
+            if (result.next()) {
+                 return result.getInt("ID");
+              
+                }
+        } catch (SQLException ex) {
+            System.err.println("SQL error: " + ex.getMessage());
+        } finally {
+            mysql.closeConnection(conn);
+        }
+        return -1;
 
-    public Patient seekPatient(int Number){
+}
+    public Patient seekPatient(long Number){
         Patient a=new Patient();
         Connection conn = mysql.openConnection();
         String sql = "SELECT * FROM patient where PhoneNumber = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1,Number);
+            pstmt.setLong(1,Number);
             
             ResultSet result = pstmt.executeQuery();
             if (result.next()) {
@@ -47,7 +69,7 @@ public class StaffDAO {
                 try (PreparedStatement p = conn.prepareStatement(sql)) {
                     p.setString(1, k.getName());
                     p.setString(2, (k.getAddress()));
-                    p.setInt(3,k.getPhoneNumber());
+                    p.setLong(3,k.getPhoneNumber());
                     p.setString(4,k.getGender());
                     p.executeUpdate();
                     return true;
@@ -90,11 +112,11 @@ public class StaffDAO {
                 Connection conn = mysql.openConnection();
                 String sql = "INSERT INTO appointment(PatientPhone,Date,Time,Doctor,StaffID) Values(?,?,?,?);";
                 try (PreparedStatement p = conn.prepareStatement(sql)) {
-                    p.setInt(1, Appointment.PatientPhone);
+                    p.setLong(1, Appointment.PatientPhone);
                     p.setString(2, a.getDate());
                     p.setString(3,a.getTime());
                     p.setString(4,a.getDoctor());
-                    p.setInt(5, Appointment.StaffId);
+                    p.setInt(5, staffHomePage.StaffID);
                     p.executeUpdate();
                     return true;
                 } catch (Exception f) {
@@ -105,6 +127,34 @@ public class StaffDAO {
                 }
                     
         return false;
+    }
+    public List<Appointment> fetchAppointmentRecords() {
+            List<Appointment> appointmentList = new ArrayList<>();
+            Connection conn = mysql.openConnection();
+            String sqlQuery = "SELECT Date,Time,Doctor,StaffID FROM appointment where PatientPhone=?";
+            try(PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery)){
+                preparedStatement.setLong(1, Appointment.PatientPhone);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {   
+                    Appointment a = new Appointment();
+                    a.setDate(resultSet.getString("Date"));
+                    a.setTime(resultSet.getString("Time"));
+                    a.setDoctor(resultSet.getString("Doctor"));
+                    a.StaffID=resultSet.getInt("StaffID");
+                    appointmentList.add(a);
+                }              
+                resultSet.close();
+                preparedStatement.close();
+            }
+catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            mysql.closeConnection(conn);
+        }
+//        for (Object element : staffList) {
+////            System.out.println(element);
+//        }
+        return appointmentList;
     }
 }
 
