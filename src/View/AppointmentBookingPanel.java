@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import Controller.AppointmentActions;
 import javax.swing.*;
-
+import Model.Appointment;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  *
  * @author manis
@@ -38,8 +41,8 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         bookButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        doctor = new javax.swing.JComboBox<>();
+        time = new javax.swing.JComboBox<>();
         date = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,13 +90,13 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setBackground(new java.awt.Color(50, 0, 50));
-        jComboBox1.setForeground(java.awt.Color.white);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor 1", "Doctor 2", "Doctor 3", "Doctor 4", "Doctor 5" }));
+        doctor.setBackground(new java.awt.Color(50, 0, 50));
+        doctor.setForeground(java.awt.Color.white);
+        doctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor 1", "Doctor 2", "Doctor 3", "Doctor 4", "Doctor 5" }));
 
-        jComboBox2.setBackground(new java.awt.Color(50, 0, 50));
-        jComboBox2.setForeground(java.awt.Color.white);
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10 AM", "1 PM", "3 PM" }));
+        time.setBackground(new java.awt.Color(50, 0, 50));
+        time.setForeground(java.awt.Color.white);
+        time.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10 AM", "1 PM", "3 PM" }));
 
         date.setDateFormatString("yyyy-MM-dd");
 
@@ -117,8 +120,8 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, 99, Short.MAX_VALUE)))
+                            .addComponent(time, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(doctor, 0, 99, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
@@ -134,10 +137,10 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -206,36 +209,44 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_numberFieldActionPerformed
 
     private void bookButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookButtonMouseClicked
-        // TODO add your handling code here:
-                // TODO add your handling code here:
-//        String number = numberField.getText();
-//        String date = dateField.getText();
-//        String time = timeField.getText();
-//        String doctor = doctorField.getText();
-        
-        
-        
-        //System.out.println("User Clicked Button");
-        //JOptionPane.showMessageDialog(this, email);
-        //Task
-        //When user click on signup
-        //If email is empty prompt "Email is empty"
-        //If name is empty prompt "Name is empty"
-        //Do the same for password and confirm
-        //If password and confirm are not equal prompt
-        //If everything is validated prompt "Signup successful"
-        
-//        if(number.equals("")){
-//            JOptionPane.showMessageDialog(this, "You have to fill every field.");
-//        }else if(date.equals("")){
-//        JOptionPane.showMessageDialog(this, "You have to fill every field.");
-//        }else if(time.equals("")){
-//        JOptionPane.showMessageDialog(this, "You have to fill every field.");
-//        }else if(doctor.equals("")){
-//        JOptionPane.showMessageDialog(this, "You have to fill every field.");    
-//        }else{
-//        JOptionPane.showMessageDialog(this, "Successfully Booked!");
-//        }
+Appointment a = new Appointment();
+
+// Get the selected date
+Date selectedDate = date.getDate();
+a.StaffID = staffHomePage.StaffID;
+
+if (selectedDate == null) {
+    JOptionPane.showMessageDialog(this, "Please select a date");
+} else {
+    // Format the date
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    String formattedDate = sdf.format(selectedDate);
+    a.setDate(formattedDate);
+    a.setTime((String) time.getSelectedItem());
+    a.setDoctor((String) doctor.getSelectedItem());
+    a.PatientPhone = Appointment.PatientPhone;
+
+    AppointmentActions aa = new AppointmentActions();
+    if (!aa.isDateValid(formattedDate)) {
+        if (!aa.isAppointmentAvailable(a)) {
+            JOptionPane.showMessageDialog(this, "The date is already occupied Please select another date/time/doctor");
+        } else {
+            if(aa.CommitAppointment(a)){
+                this.dispose();
+                String Message="Appointment Booked Successfully for:\nNumber: "+a.PatientPhone+"\nDate: "+a.getDate()+"\t Time: "+a.getTime()+"\nDoctor: "+a.getDoctor();
+                JOptionPane.showMessageDialog(this, Message);
+                AppointmentInformationPanel aip=new AppointmentInformationPanel();
+                aip.setVisible(true);
+            }
+            else{
+            JOptionPane.showMessageDialog(this, "Failed Booking Appointment");
+            }
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a date for tomorrow or the day after tomorrow.");
+    }
+}
+
     }//GEN-LAST:event_bookButtonMouseClicked
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseClicked
@@ -291,13 +302,13 @@ public class AppointmentBookingPanel extends javax.swing.JFrame {
     private javax.swing.JButton bookButton;
     private javax.swing.JButton cancelButton;
     private com.toedter.calendar.JDateChooser date;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> doctor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JComboBox<String> time;
     // End of variables declaration//GEN-END:variables
 }

@@ -90,15 +90,13 @@ public class StaffDAO {
         try (PreparedStatement stt = conn.prepareStatement(query)) {
             stt.setString(2, (a.getDate()));
             stt.setString(1, (a.getTime()));
-            stt.setString(1, (a.getDoctor()));
+            stt.setString(3, (a.getDoctor()));
             re = stt.executeQuery();
             if(re.next()){
-                if(re.getString("Date").equals(a.getDate())){
-                    eee= !true;
-                }
-                else {
-                eee=  !false;
-                }
+                eee=!true;
+            }
+            else{
+            eee=!false;
             }
         } catch (SQLException ex) {
             System.err.println("SQL error: " + ex.getMessage());
@@ -110,7 +108,7 @@ public class StaffDAO {
     }
     public boolean registerAppointment(Appointment a){
                 Connection conn = mysql.openConnection();
-                String sql = "INSERT INTO appointment(PatientPhone,Date,Time,Doctor,StaffID) Values(?,?,?,?);";
+                String sql = "INSERT INTO appointment(PatientPhone,Date,Time,Doctor,StaffID) Values(?,?,?,?,?);";
                 try (PreparedStatement p = conn.prepareStatement(sql)) {
                     p.setLong(1, Appointment.PatientPhone);
                     p.setString(2, a.getDate());
@@ -128,10 +126,29 @@ public class StaffDAO {
                     
         return false;
     }
+    public boolean deleteAppointment(int id){
+       Connection conn=mysql.openConnection();
+       try{
+           
+           String sql="DELETE FROM appointment WHERE id="+id;
+           PreparedStatement pst=conn.prepareStatement(sql);
+           pst.execute();
+           return true;
+           
+        }catch(Exception e){
+            System.out.println(e);
+        }
+       finally{
+           mysql.closeConnection(conn);
+       }
+       return false;
+   }
+   
+    
     public List<Appointment> fetchAppointmentRecords() {
             List<Appointment> appointmentList = new ArrayList<>();
             Connection conn = mysql.openConnection();
-            String sqlQuery = "SELECT Date,Time,Doctor,StaffID FROM appointment where PatientPhone=?";
+            String sqlQuery = "SELECT id,Date,Time,Doctor,StaffID FROM appointment where PatientPhone=?";
             try(PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery)){
                 preparedStatement.setLong(1, Appointment.PatientPhone);
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -141,6 +158,36 @@ public class StaffDAO {
                     a.setTime(resultSet.getString("Time"));
                     a.setDoctor(resultSet.getString("Doctor"));
                     a.StaffID=resultSet.getInt("StaffID");
+                    a.setId(resultSet.getInt("id"));
+                    appointmentList.add(a);
+                }              
+                resultSet.close();
+                preparedStatement.close();
+            }
+catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            mysql.closeConnection(conn);
+        }
+//        for (Object element : staffList) {
+////            System.out.println(element);
+//        }
+        return appointmentList;
+    }
+    public List<Appointment> fetchAppointmentRecords(int id) {
+            List<Appointment> appointmentList = new ArrayList<>();
+            Connection conn = mysql.openConnection();
+            String sqlQuery = "SELECT id,Date,Time,Doctor,StaffID FROM appointment where id=?";
+            try(PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery)){
+                preparedStatement.setLong(1, id);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {   
+                    Appointment a = new Appointment();
+                    a.setDate(resultSet.getString("Date"));
+                    a.setTime(resultSet.getString("Time"));
+                    a.setDoctor(resultSet.getString("Doctor"));
+                    a.StaffID=resultSet.getInt("StaffID");
+                    a.setId(resultSet.getInt("id"));
                     appointmentList.add(a);
                 }              
                 resultSet.close();

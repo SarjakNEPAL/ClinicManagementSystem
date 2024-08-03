@@ -4,10 +4,12 @@
  */
 package View;
 
+import Controller.AppointmentActions;
 import Model.*;
 import dao.StaffDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 import View.staffHomePage;
 /**
  *
@@ -20,10 +22,11 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
      */
     public AppointmentInformationPanel() {
         initComponents();
+        fillTable();
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Appointment Information Panel");
-        fillTable();
+        
     }
 
     /**
@@ -42,8 +45,11 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        Update1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        delete = new javax.swing.JButton();
+        Update = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,7 +73,7 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         book.setBackground(new java.awt.Color(64, 21, 64));
         book.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         book.setForeground(java.awt.Color.white);
-        book.setText("Book Appointment");
+        book.setText("Book ");
         book.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bookMouseClicked(evt);
@@ -88,18 +94,38 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         jLabel3.setForeground(java.awt.Color.white);
         jLabel3.setText("Appointment Information Panel");
 
+        Update1.setBackground(new java.awt.Color(64, 21, 64));
+        Update1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        Update1.setForeground(java.awt.Color.white);
+        Update1.setText("Refresh");
+        Update1.setActionCommand("Reset");
+        Update1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Update1MouseClicked(evt);
+            }
+        });
+        Update1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Update1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(69, 69, 69))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Update1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(Update1))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -107,10 +133,56 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Date", "Time", "Doctor", "Staff ID"
+                "ID", "Date", "Time", "Doctor", "Staff ID"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable1);
+
+        delete.setBackground(new java.awt.Color(64, 21, 64));
+        delete.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        delete.setForeground(java.awt.Color.white);
+        delete.setText("Delete");
+        delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteMouseClicked(evt);
+            }
+        });
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+
+        Update.setBackground(new java.awt.Color(64, 21, 64));
+        Update.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        Update.setForeground(java.awt.Color.white);
+        Update.setText("Update");
+        Update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpdateMouseClicked(evt);
+            }
+        });
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -124,10 +196,14 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(book)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Update)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(delete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -142,7 +218,9 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(book)
-                            .addComponent(Back)))
+                            .addComponent(Back)
+                            .addComponent(Update)
+                            .addComponent(delete)))
                     .addComponent(jLabel4))
                 .addContainerGap())
         );
@@ -195,18 +273,106 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         staffHomePage A =new staffHomePage(); 
         A.setVisible(true);
     }//GEN-LAST:event_BackMouseClicked
+
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel tblModel=(DefaultTableModel) jTable1.getModel();
+        int row = jTable1.getSelectedRow();
+    if(jTable1.getSelectedRowCount()==1){
+        int column = 0; // First column index
+        int value = (int)jTable1.getModel().getValueAt(row, column);
+        StaffDAO owner=new StaffDAO();
+        owner.deleteAppointment(value);
+        this.dispose();
+        JOptionPane.showMessageDialog(this,"Appointment deleted successfully");
+        AppointmentInformationPanel ok = new AppointmentInformationPanel();
+        ok.setVisible(true);
+    }
+    else{
+        if(jTable1.getSelectedRowCount()==1){JOptionPane.showMessageDialog(this,"Please create an appointment first");}
+        else{JOptionPane.showMessageDialog(this,"Single row must be selected");}
+    }
+    }//GEN-LAST:event_deleteMouseClicked
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UpdateMouseClicked
+
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+        // TODO add your handling code here:
+             DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+    int row = jTable1.getSelectedRow();
+    if (jTable1.getSelectedRowCount() == 1) {
+        Appointment a = new Appointment();
+        a.StaffID=(staffHomePage.StaffID);
+
+        // Convert appointment ID to an integer
+        String idString = jTable1.getModel().getValueAt(row, 0).toString();
+        try {
+            int appointmentId = Integer.parseInt(idString);
+            a.setId(appointmentId);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid appointment ID: " + idString);
+            return;
+        }
+
+        // Convert date, time, and doctor to strings
+        a.setDate(jTable1.getModel().getValueAt(row, 1).toString());
+        a.setTime(jTable1.getModel().getValueAt(row, 2).toString());
+        a.setDoctor(jTable1.getModel().getValueAt(row, 3).toString());
+
+        StaffDAO sda = new StaffDAO();
+        AppointmentActions aa = new AppointmentActions();
+
+
+            if (aa.isValidDoctor(a.getDoctor())) {
+                if (aa.isValidTime(a.getTime())) {
+                    if (sda.isAppointmentFree(a)) {
+                        sda.deleteAppointment(a.getId());
+                        sda.registerAppointment(a);
+                        this.dispose();
+                        JOptionPane.showMessageDialog(this, "Appointment updated successfully");
+                        AppointmentInformationPanel ok = new AppointmentInformationPanel();
+                        ok.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Following Appointment Date/Time/Doctor is not available. Please use another date/time/doctor.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid Date. Only possible Values: \n10 AM, 1 PM, 3 PM");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid Doctor");
+            }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a single row to update an appointment.");
+    }
+        
+    }//GEN-LAST:event_UpdateActionPerformed
+
+    private void Update1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Update1MouseClicked
+        // TODO add your handling code here:
+        fillTable();
+    }//GEN-LAST:event_Update1MouseClicked
+
+    private void Update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Update1ActionPerformed
     private void fillTable(){
     // Assuming you have a List<Staff> called staffList
         StaffDAO init=new StaffDAO();
         List<Appointment> appointmentList = init.fetchAppointmentRecords(); // Initialize this with your actual data
             
         // Create a DefaultTableModel with column names
-        String[] columnNames = {"Date", "Time", "Doctor","StaffID"};
+        String[] columnNames = {"ID","Date", "Time", "Doctor","StaffID"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         // Populate the table with data from the staffList
         for (Appointment a : appointmentList) {
-            Object[] rowData = {a.getDate(), a.getTime(),a.getDoctor(),a.StaffID };
+            Object[] rowData = {a.getId(),a.getDate(), a.getTime(),a.getDoctor(),a.StaffID };
             model.addRow(rowData);
         }
 
@@ -252,7 +418,10 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
+    private javax.swing.JButton Update;
+    private javax.swing.JButton Update1;
     private javax.swing.JButton book;
+    private javax.swing.JButton delete;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

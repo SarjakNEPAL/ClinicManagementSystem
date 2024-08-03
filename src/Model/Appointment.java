@@ -9,12 +9,23 @@ package Model;
  * @author bhand
  */
 public class Appointment {
+    private int id;
     public static long PatientPhone;
     private String Date;
     private String Time;
     private String Doctor;
     public int StaffID;
-    
+        
+
+    // Getter method for id
+    public int getId() {
+        return id;
+    }
+
+    // Setter method for id
+    public void setId(int id) {
+        this.id = id;
+    }
     // Getter methods
 
     public String getDate() {

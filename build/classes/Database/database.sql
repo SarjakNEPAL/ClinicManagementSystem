@@ -28,13 +28,13 @@ CREATE TABLE Patient (
 
 -- Create the Appointment table
 CREATE TABLE Appointment (
+    id int primary key auto_increment,
     PatientPhone bigint,
     Date DATE,
-    Time TIME,
+    Time VARCHAR(255),
     Doctor VARCHAR(255),
     StaffID INT,
     FOREIGN KEY (PatientPhone) REFERENCES Patient(PhoneNumber),
-    FOREIGN KEY (StaffID) REFERENCES Staff(ID)
 );
 
 -- Insert a sample staff record (remember to hash the password securely)
