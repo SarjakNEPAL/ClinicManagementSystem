@@ -5,6 +5,7 @@
 package View;
 import Model.Staff;
 import dao.OwnerDao;
+import java.awt.Toolkit;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 import java.util.List;
@@ -177,13 +178,19 @@ public class Staffinnformationpanel extends javax.swing.JFrame {
         OwnerDao owner=new OwnerDao();
         owner.deleteStaff(value);
         this.dispose();
+        Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(this,"Staff deleted successfully");
+//        Toolkit.getDefaultToolkit().beep();
         Staffinnformationpanel ok = new Staffinnformationpanel();
         ok.setVisible(true);
     }
     else{
         if(jTable1.getSelectedRowCount()==1){JOptionPane.showMessageDialog(this,"Please register a user first");}
-        else{JOptionPane.showMessageDialog(this,"Single row must be selected");}
+        else{
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this,"Single row must be selected");
+//        Toolkit.getDefaultToolkit().beep();
+        }
     }
     
     

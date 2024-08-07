@@ -7,6 +7,7 @@ import javax.swing.*;
 import Controller.patientTasks;
 import Model.Appointment;
 import Model.Patient;
+import java.awt.Toolkit;
 /**
  *
  * @author Aayush
@@ -127,11 +128,15 @@ public class staffHomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     
     if(numberField.getText().isEmpty()){
+        Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(this,"Please Supply the Number");
+//        Toolkit.getDefaultToolkit().beep();
         numberField.requestFocus();
     }
     else if((numberField.getText()).length()!=10){
+        Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(this,"Enter Valid Phone Number");
+//        Toolkit.getDefaultToolkit().beep();
         numberField.requestFocus();
     }
     
@@ -142,7 +147,7 @@ public class staffHomePage extends javax.swing.JFrame {
         if(ptsk.isPatientExist(number)){
         Patient p = ptsk.getPatient();
         String messege="Patient with details:\n Name: "+p.getName()+"\n Address: "+p.getAddress()+"\n Gender: "+p.getGender()+"\n with the number: "+p.getPhoneNumber()+"\n Do you want to view appointments?";
-                      
+            Toolkit.getDefaultToolkit().beep();          
             int r=JOptionPane.showConfirmDialog(this,messege,"PATIENT FOUND!!",JOptionPane.YES_NO_CANCEL_OPTION);
             switch (r){
                 case (JOptionPane.YES_OPTION):
@@ -158,6 +163,7 @@ public class staffHomePage extends javax.swing.JFrame {
             }
         else{
             this.setVisible(false);
+            Toolkit.getDefaultToolkit().beep();
             int result=JOptionPane.showConfirmDialog(this,"No patient is registered using this phone number.\n Do you want to register new Patient?","404 PATIENT NOT FOUND",JOptionPane.YES_NO_CANCEL_OPTION);
             switch (result){
                 case (JOptionPane.YES_OPTION):

@@ -6,6 +6,7 @@ package View;
 import javax.swing.*;
 import Model.Patient;
 import Controller.patientTasks;
+import java.awt.Toolkit;
 /**
  *
  * @author manis
@@ -295,28 +296,39 @@ public class PatientRegistrationPanel extends javax.swing.JFrame {
                         pp.setPhoneNumber(phoneNumber);
                         patientTasks ptsk = new patientTasks();
                         if(ptsk.commitPatient(pp)){
+                            Toolkit.getDefaultToolkit().beep();
                             JOptionPane.showMessageDialog(this, "Patient Registration Success \n Please re-enter the phone number \n to access appointment panel");
                             this.dispose();
                             staffHomePage sh=new staffHomePage();
                             sh.setVisible(true);
                         }
                         else{
+                            Toolkit.getDefaultToolkit().beep();
                             JOptionPane.showMessageDialog(this, "Patient Registration Failed");
+//                            Toolkit.getDefaultToolkit().beep();
                         }
                     } catch (NumberFormatException e) {
+                        Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(this, "Invalid phone number format");
+//                        Toolkit.getDefaultToolkit().beep();
                         number.requestFocus();
                     }
                 } else {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "Phone number must be of 10 digits");
+//                    Toolkit.getDefaultToolkit().beep();
                     number.requestFocus();
                 }
             } else {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "Phone number must contain only numbers");
+//                Toolkit.getDefaultToolkit().beep();
                 number.requestFocus();
             }
         } else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "Please fill all the fields");
+//            Toolkit.getDefaultToolkit().beep();
         }
 
     }//GEN-LAST:event_registerMouseClicked

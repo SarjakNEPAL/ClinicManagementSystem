@@ -6,6 +6,7 @@ package View;
 import Controller.AppointmentActions;
 import javax.swing.*;
 import Model.Appointment;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
@@ -216,6 +217,7 @@ Date selectedDate = date.getDate();
 a.StaffID = staffHomePage.StaffID;
 
 if (selectedDate == null) {
+    Toolkit.getDefaultToolkit().beep();
     JOptionPane.showMessageDialog(this, "Please select a date");
 } else {
     // Format the date
@@ -229,21 +231,29 @@ if (selectedDate == null) {
     AppointmentActions aa = new AppointmentActions();
     if (!aa.isDateValid(formattedDate)) {
         if (!aa.isAppointmentAvailable(a)) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "The date is already occupied Please select another date/time/doctor");
+            
+            
         } else {
             if(aa.CommitAppointment(a)){
                 this.dispose();
+                Toolkit.getDefaultToolkit().beep();
                 String Message="Appointment Booked Successfully for:\nNumber: "+a.PatientPhone+"\nDate: "+a.getDate()+"\t Time: "+a.getTime()+"\nDoctor: "+a.getDoctor();
                 JOptionPane.showMessageDialog(this, Message);
                 AppointmentInformationPanel aip=new AppointmentInformationPanel();
                 aip.setVisible(true);
             }
             else{
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "Failed Booking Appointment");
+            
             }
         }
     } else {
+        Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(this, "Please select a date for tomorrow or the day after tomorrow.");
+        
     }
 }
 

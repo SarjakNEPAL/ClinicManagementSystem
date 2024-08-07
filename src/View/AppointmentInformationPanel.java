@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import View.staffHomePage;
+import java.awt.Toolkit;
 /**
  *
  * @author manis
@@ -284,13 +285,17 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         StaffDAO owner=new StaffDAO();
         owner.deleteAppointment(value);
         this.dispose();
+        Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(this,"Appointment deleted successfully");
         AppointmentInformationPanel ok = new AppointmentInformationPanel();
         ok.setVisible(true);
     }
     else{
+        Toolkit.getDefaultToolkit().beep();
         if(jTable1.getSelectedRowCount()==1){JOptionPane.showMessageDialog(this,"Please create an appointment first");}
-        else{JOptionPane.showMessageDialog(this,"Single row must be selected");}
+        else{JOptionPane.showMessageDialog(this,"Single row must be selected");
+        
+        }
     }
     }//GEN-LAST:event_deleteMouseClicked
 
@@ -316,6 +321,7 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
             int appointmentId = Integer.parseInt(idString);
             a.setId(appointmentId);
         } catch (NumberFormatException e) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "Invalid appointment ID: " + idString);
             return;
         }
@@ -335,20 +341,29 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
                         sda.deleteAppointment(a.getId());
                         sda.registerAppointment(a);
                         this.dispose();
+                        Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(this, "Appointment updated successfully");
                         AppointmentInformationPanel ok = new AppointmentInformationPanel();
                         ok.setVisible(true);
                     } else {
+                        Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(this, "Following Appointment Date/Time/Doctor is not available. Please use another date/time/doctor.");
+                      
                     }
                 } else {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "Invalid Date. Only possible Values: \n10 AM, 1 PM, 3 PM");
+                 
                 }
             } else {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "Invalid Doctor");
+               
             }
     } else {
+        Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(this, "Please select a single row to update an appointment.");
+       
     }
         
     }//GEN-LAST:event_UpdateActionPerformed
@@ -362,6 +377,7 @@ public class AppointmentInformationPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Update1ActionPerformed
     private void fillTable(){
+        Toolkit.getDefaultToolkit().beep();
     // Assuming you have a List<Staff> called staffList
         StaffDAO init=new StaffDAO();
         List<Appointment> appointmentList = init.fetchAppointmentRecords(); // Initialize this with your actual data

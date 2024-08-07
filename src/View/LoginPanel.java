@@ -178,6 +178,7 @@ public class LoginPanel extends javax.swing.JFrame {
         if (kk == null) {
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this,"Username or Password error");
+            Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
             
         } else {
             if (kk.getType().equals("owner")) {

@@ -22,7 +22,7 @@ CREATE TABLE Staff (
 CREATE TABLE Patient (
     Name VARCHAR(255),
     Address VARCHAR(255),
-    PhoneNumber bigint,
+    PhoneNumber bigint primary KEY,
     Gender VARCHAR(10)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE Appointment (
     Time VARCHAR(255),
     Doctor VARCHAR(255),
     StaffID INT,
-    FOREIGN KEY (PatientPhone) REFERENCES Patient(PhoneNumber),
+    FOREIGN KEY (PatientPhone) REFERENCES Patient(PhoneNumber)
 );
 
 -- Insert a sample staff record (remember to hash the password securely)

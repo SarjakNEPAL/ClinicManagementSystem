@@ -5,6 +5,7 @@
 package View;
 import View.LoginPanel;
 import Controller.PsgChg;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 /**
  *
@@ -185,13 +186,27 @@ public class Adminpassword extends javax.swing.JFrame {
         chgp.NewPass= Npass.getText();
         chgp.CPass=Cpass.getText();
         String Output=chgp.chgPass();
-        if(Output.equals("EMPTY")){JOptionPane.showMessageDialog(this,"Fill all the fields");}
-        if(Output.equals("OPNP")){JOptionPane.showMessageDialog(this,"Old Password and New Password cannot be same");}
-        if(Output.equals("NPCP")){JOptionPane.showMessageDialog(this,"New Password and Confirm Password must be same");}
-        if(Output.equals("PSMC")){JOptionPane.showMessageDialog(this,"Old Password is incorrect");}
-        if(Output.equals("NTLG")){JOptionPane.showMessageDialog(this,"New Password must be more than 7 character long");}
-        if(Output.equals("Failed")){JOptionPane.showMessageDialog(this,"Failed Changing Password");}
-        if(Output.equals("Success")){JOptionPane.showMessageDialog(this,"Password Changed Successfully!! Logging Out! Please Relogin!");
+        if(Output.equals("EMPTY")){
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this,"Fill all the fields");}
+        if(Output.equals("OPNP")){
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this,"Old Password and New Password cannot be same");}
+        if(Output.equals("NPCP")){
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this,"New Password and Confirm Password must be same");}
+        if(Output.equals("PSMC")){
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this,"Old Password is incorrect");}
+        if(Output.equals("NTLG")){
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this,"New Password must be more than 7 character long");}
+        if(Output.equals("Failed")){
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this,"Failed Changing Password");}
+        if(Output.equals("Success")){
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this,"Password Changed Successfully!! Logging Out! Please Relogin!");
             this.dispose();
             LoginPanel a= new LoginPanel();
             a.setVisible(true);

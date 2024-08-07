@@ -5,6 +5,7 @@
 package View;
 import dao.OwnerDao;
 import Model.Staff;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 /**
  *
@@ -245,27 +246,33 @@ public class StaffRegistrationPanel extends javax.swing.JFrame {
         if(!(newStaff.getName().isEmpty())&& !(newStaff.getPassword().isEmpty())&&!(ConfirmPassword.isEmpty())){
             String execute=a.createStaff(newStaff);
             if(newStaff.getPassword().length()>8){
-            switch (execute){
-                case "EXT":
-                    JOptionPane.showMessageDialog(this,"Staff with following name already exist");
-                case "SQL":
-                    JOptionPane.showMessageDialog(this,"Failed Creating New staff");
-                case "OK":
-                    JOptionPane.showMessageDialog(this,"Registered Staff successfully");
+                if ("EXT".equals(execute)) {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(this, "Staff with following name already exist");
+                } else if ("SQL".equals(execute)) {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(this, "Failed Creating New staff");
+                } else if ("OK".equals(execute)) {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(this, "Registered Staff successfully");
                     this.dispose();
-                    Staffinnformationpanel kkg=new Staffinnformationpanel();
+                    Staffinnformationpanel kkg = new Staffinnformationpanel();
                     kkg.setVisible(true);
-            }}
+                }
+                }
             else{
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this,"Password must be more than 8 characters long");
             }
             
         }
         else{
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this,"Fill all the fields");
         }
         }
         else{
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this,"Maximum number of Staff reached");
         }
     }//GEN-LAST:event_SubmitMouseClicked
